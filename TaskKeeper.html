@@ -1,0 +1,51 @@
+<!<!DOCTYPE html>
+<html ng-app="taskModule"> 
+<head>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <script src="Lib/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body ng-controller="NewController">
+    <div id="header">
+        <div id="newTaskButtonWrapper">
+            <input type="button" id="newTaskButton" class="buttonStyle" value="New To Do List" ng-click="createTaskList()">
+        </div>
+    </div>
+    <div id="newList" ng-show="addTaskIsHidden" class="Container">
+        <form id="newItemForm">
+           <label for="newItem">Enter a task: </label><input type="text" name="newItem" id="newItem" ng-model="newListText"><br>
+           <input type="image" class="AddNewItem" ng-src="Images/AddItem.png" ng-click="addTask()">
+           <div ng-repeat="task in tasks">
+                
+                <li>{{task.text}}</li>
+            </div>
+            <div>
+                <p>{{newListText}}</p>
+            </div>
+            <input class="buttonStyle" type="button" ng-click="saveTask()" value="Save the List">
+        </form>
+        
+    </div>
+
+    <div ng-show="showListIsHidden" class="Container">
+        <ul>
+            <li ng-repeat="task in tasks">
+                <input type="checkbox" name="taskCheckBox" ng-model="task.done">
+                <label for="taskCheckbox" class="complete-{{task.done}}">{{task.text}}</label>
+            </li>    
+        </ul>
+        
+        <div ng-show="savedListTextBox">
+            <input type="text" name="newTaskItem" value="Add New Task" ng-model="newListText">
+            <input type="image" name="addNewTask" class="AddNewItem" ng-src="Images/AddItem.png" ng-click="addTaskToSavedList()">
+            
+        </div>
+        <div ng-show="addToExistingListButton">
+            <input type="button" name="AddMore" value="Add an additional task" ng-click="addOneMoreTask()" class="buttonStyle">
+        </div>
+
+    </div>
+    
+</body>
+</html>
